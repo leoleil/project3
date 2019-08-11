@@ -63,7 +63,7 @@ DWORD downdata(LPVOID lpParameter)
 				if (ipSet.size() == 0) {
 					delete groundStationId;
 					delete satelliteId;
-					ackSql = "update 任务分配表 set 任务状态 = 5 , ACK = 1100 ,任务结束时间 = now() where 任务编号 = " + dataSet[i][0];
+					ackSql = "update 任务分配表 set 任务状态 = 5 ,任务结束时间 = now() where 任务编号 = " + dataSet[i][0];
 					mysql.writeDataToDB(ackSql);
 					continue;//没有找到ip地址
 				}
@@ -73,7 +73,7 @@ DWORD downdata(LPVOID lpParameter)
 				const char* ip = ipSet[0][0].c_str();//获取到地址
 													 //建立TCP连接
 				if (!socketer.createSendServer(ip, 4997, 0)) {
-					ackSql = "update 任务分配表 set 任务状态 = 5 , ACK = 1100,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
+					ackSql = "update 任务分配表 set 任务状态 = 5 ,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
 					mysql.writeDataToDB(ackSql);
 					//创建不成功释放资源
 					delete groundStationId;
@@ -92,7 +92,7 @@ DWORD downdata(LPVOID lpParameter)
 				if (disk.size() == 0) {
 					mysql.writeDataToDB("INSERT INTO 系统日志表(时间,模块,事件,任务编号) VALUES (now(),'数据下行','存盘位置未知',"+ dataSet[i][0] +");");
 					cout << "| 数据下行         | 存盘位置未知，请在数据库设置。" << endl;
-					ackSql = "update 任务分配表 set 任务状态 = 5 , ACK = 1100,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
+					ackSql = "update 任务分配表 set 任务状态 = 5 ,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
 					mysql.writeDataToDB(ackSql);
 					//创建不成功释放资源
 					delete groundStationId;
@@ -124,7 +124,7 @@ DWORD downdata(LPVOID lpParameter)
 					mysql.writeDataToDB("INSERT INTO 系统日志表(时间,模块,事件,任务编号) VALUES (now(),'数据下行','无下行文件'," + dataSet[i][0] + ");");
 					cout << "| 数据下行         | ";
 					cout << path << " 无下行文件" << endl;
-					ackSql = "update 任务分配表 set 任务状态 = 5 , ACK = 1100,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
+					ackSql = "update 任务分配表 set 任务状态 = 5 ,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
 					mysql.writeDataToDB(ackSql);
 					//创建不成功释放资源
 					delete groundStationId;
@@ -140,7 +140,7 @@ DWORD downdata(LPVOID lpParameter)
 					mysql.writeDataToDB("INSERT INTO 系统日志表(时间,模块,事件,任务编号) VALUES (now(),'数据下行','下行文件无法打开'," + dataSet[i][0] + ");");
 					cout << "| 数据下行         | ";
 					cout << file << " 无法打开" << endl;
-					ackSql = "update 任务分配表 set 任务状态 = 5 , ACK = 1100,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
+					ackSql = "update 任务分配表 set 任务状态 = 5 ,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
 					mysql.writeDataToDB(ackSql);
 					//创建不成功释放资源
 					delete groundStationId;
@@ -174,7 +174,7 @@ DWORD downdata(LPVOID lpParameter)
 						//发送失败释放资源跳出文件读写
 						mysql.writeDataToDB("INSERT INTO 系统日志表(时间,模块,事件,任务编号) VALUES (now(),'数据下行','发送失败，断开连接'," + dataSet[i][0] + ");");
 						cout << "| 数据下行         | 发送失败，断开连接" << endl;
-						ackSql = "update 任务分配表 set 任务状态 = 5 , ACK = 1100,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
+						ackSql = "update 任务分配表 set 任务状态 = 5 ,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
 						mysql.writeDataToDB(ackSql);
 						delete sendBuf;
 						delete up_expand_name;
