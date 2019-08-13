@@ -189,7 +189,7 @@ DWORD downdata(LPVOID lpParameter)
 						cout << "| 数据下行         | " << dataSet[i][0] << "号任务下行成功" << endl;
 						mysql.writeDataToDB("INSERT INTO 系统日志表(时间,模块,事件,任务编号) VALUES (now(),'数据下行','发送成功断开连接'," + dataSet[i][0] + ");");
 						//修改数据库分发标志
-						ackSql = "update 任务分配表 set 任务状态 = 3 , ACK = 1000,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
+						ackSql = "update 任务分配表 set 任务状态 = 3 ,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
 						mysql.writeDataToDB(ackSql);
 
 					}
