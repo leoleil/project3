@@ -17,7 +17,7 @@ DWORD ack(LPVOID lpParameter)
 							 //连接数据库
 		if (mysql.connectMySQL(SERVER, USERNAME, PASSWORD, DATABASE, PORT)) {
 			//从数据中获取分配任务
-			string selectSql = "select 任务编号,ACK,unix_timestamp(任务开始时间),unix_timestamp(任务结束时间),卫星编号,服务器编号,任务状态 from 任务分配表 where ack is not null;";
+			string selectSql = "select 任务编号,ACK,unix_timestamp(任务开始时间),unix_timestamp(任务结束时间),卫星编号,服务器编号,任务状态 from 任务分配表 where ack is not null and 任务状态 = 3 || 任务状态 = 5 || 任务状态 = 1;";
 			vector<vector<string>> dataSet;
 			mysql.getDatafromDB(selectSql, dataSet);
 			if (dataSet.size() == 0) {
