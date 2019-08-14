@@ -403,7 +403,8 @@ DWORD tele(LPVOID lpParameter)
 					
 				}
 				//修改数据库分发标志
-				ackSql = "update 任务分配表 set 任务状态 = 3 , ACK = 1000,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
+				ackSql = "update 任务分配表 set 任务状态 = 3 ,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
+				//ackSql = "update 任务分配表 set 任务状态 = 3 , ACK = 1000,任务结束时间 = now()  where 任务编号 = " + dataSet[i][0];
 				mysql.writeDataToDB(ackSql);
 				mysql.closeMySQL();
 				
